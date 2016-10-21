@@ -1066,6 +1066,7 @@ function CodeEditor(textAreaDomID, width, height, game) {
                 'type': 'POST',
                 'data': {email: 'mail_id', link: data['html_url'], 'level': lvlNum},
                 'success': function (data, status, xhr) {
+                    console.log(data);
                     console.info('Posted for '+lvlNum);
                 }
         });
