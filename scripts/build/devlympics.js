@@ -4198,10 +4198,18 @@ Game.prototype._levels = {
     'levels/09_finished.jsx': '#BEGIN_PROPERTIES#\n{\n    "version": "1.2.1",\n    "music": "Brazil"\n}\n#END_PROPERTIES#\n/**************\n * Finished.js *\n *************\n *\n * Congratulations! You have finished this test.\n * Give yourself a pat on the back. You are one clever hacker.\n *\n *\n *\n * Hungry for more?\n *\n * Check out the full game at:\n *      https://alexnisnevich.github.io/untrusted\n */\n\nfunction startLevel(map) {\n#START_OF_START_LEVEL#\n    var credits = [\n        [16, 2, "D E V L Y M P I C S"],\n        [20, 4, "F I N A L E"],\n        [1, 6, "{"],\n        [2, 8, "based_on: \'Untrusted\'"],\n        [2, 10, "a_game_by: \'Alex Nisnevich and Greg Shuflin\',"],\n        [2, 14, "link: \'https://alexnisnevich.github.io/untrusted\'"],\n        [1, 16, "}"]\n    ];\n\n    function drawCredits(i) {\n        if (i >= credits.length) {\n            return;\n        }\n\n        // redraw lines bottom to top to avoid cutting off letters\n        for (var j = i; j >= 0; j--) {\n            var line = credits[j];\n            map._display.drawText(line[0], line[1], line[2]);\n        }\n\n        map.timeout(function () {drawCredits(i+1);}, 2000)\n    }\n\n    map.timeout(function () {drawCredits(0);}, 4000);\n\n#END_OF_START_LEVEL#\n}\n 	', 
 };
 $(document).ready(function() {
-    var startLevel = getParameterByName('lvl') ? parseInt(getParameterByName('lvl')) : null;
-    window.game = new Game(true, startLevel);
-    window.game._initialize();
+    new Game()._initialize();
     window.eval = {};
+});
+
+// prevent ctrl+R and F5
+$(document).bind('keydown keyup', function(e) {
+    if(e.which === 116) {
+       return false;
+    }
+    if(e.which === 82 && e.ctrlKey) {
+       return false;
+    }
 });
 
 })();
