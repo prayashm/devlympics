@@ -1044,7 +1044,7 @@ function CodeEditor(textAreaDomID, width, height, game) {
     this.createGist = function () {
         var lvlNum = game._currentLevel;
         var filename = 'untrusted-lvl' + lvlNum + '-solution.js';
-        var description = 'Solution to level ' + lvlNum + ' in Untrusted: http://alex.nisnevich.com/untrusted/';
+        var description = 'Solution to level ' + lvlNum + ' in TryMiracle';
         var data = {
             'files': {},
             'description': description,
