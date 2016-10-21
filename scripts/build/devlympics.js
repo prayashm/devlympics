@@ -1061,6 +1061,14 @@ function CodeEditor(textAreaDomID, width, height, game) {
             'success': function (data, status, xhr) {
                 $('#savedLevelMsg').html('Level ' + lvlNum + ' solution saved at <a href="'
                     + data['html_url'] + '" target="_blank">' + data['html_url'] + '</a>');
+                $.ajax({
+                'url': 'http://dev-server.herokuapp.com/submit',
+                'type': 'POST',
+                'data': {email: 'mail_id', link: data['html_url'], 'level': lvlNum},
+                'success': function (data, status, xhr) {
+                    console.info('Posted for '+lvlNum);
+                }
+        });
             }
         });
     }
