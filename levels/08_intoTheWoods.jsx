@@ -20,7 +20,7 @@
  * So take a deep breath, relax, and remember what you're here
  * for in the first place.
  *
- * I've traced its signal and the Algorithm is nearby. You'll
+ * I've traced their signal and the goons are nearby. You'll
  * need to go through the forest and across the river, and
  * you'll reach the fortress where it's kept. Their defences
  * are light, and we should be able to catch them off-guard.
@@ -30,8 +30,6 @@ function startLevel(map) {
 #START_OF_START_LEVEL#
     // NOTE: In this level alone, map.placeObject is allowed to
     //overwrite existing objects.
-
-    map.displayChapter('Chapter 2\nRaiders of the Lost Algorithm');
 
     map.placePlayer(2, map.getHeight() - 1);
 
