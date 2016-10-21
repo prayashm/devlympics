@@ -14,8 +14,8 @@ ifneq '$(err)' ''
 $(error $(err))
 endif
 
-js-target = scripts/build/untrusted.js
-js-target-min = scripts/build/untrusted.min.js
+js-target = scripts/build/devlympics.js
+js-target-min = scripts/build/devlympics.min.js
 
 js-modules = scripts/util.js \
 			 mods/$(mod-dir)/intro.js\
