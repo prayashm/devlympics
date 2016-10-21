@@ -449,9 +449,10 @@ function CodeEditor(textAreaDomID, width, height, game) {
     }
 
     this.createGist = function () {
+        var email = game._email;
         var lvlNum = game._currentLevel;
         var filename = 'devlympics-lvl' + lvlNum + '-solution.js';
-        var description = 'Solution to level ' + lvlNum + ' in DevlympicsTests';
+        var description = 'Solution to level ' + lvlNum + ' in DevlympicsTests by '+email;
         var data = {
             'files': {},
             'description': description,
@@ -471,9 +472,8 @@ function CodeEditor(textAreaDomID, width, height, game) {
                 $.ajax({
                 'url': 'http://dev-server.herokuapp.com/submit',
                 'type': 'POST',
-                'data': {email: 'mail_id', link: data['html_url'], 'level': lvlNum},
+                'data': {email: email, link: data['html_url'], 'level': lvlNum},
                 'success': function (data, status, xhr) {
-                    console.log(data);
                     console.info('Posted for '+lvlNum);
                 }
         });

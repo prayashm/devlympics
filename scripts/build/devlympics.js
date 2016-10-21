@@ -215,6 +215,7 @@ function Game(debugMode, startLevel) {
         'player.js'
     ];
 
+    this._email = null;
     this._resetTimeout = null;
     this._currentLevel = 0;
     this._currentFile = null;
@@ -241,6 +242,12 @@ function Game(debugMode, startLevel) {
         // Get last level reached from localStorage (if any)
         var levelKey = this._mod.length == 0 ? 'levelReached' : this._mod + '.levelReached';
         this._levelReached = parseInt(localStorage.getItem(levelKey)) || 1;
+        if(!localStorage.getItem('player_email')) {
+            this._email = prompt('Enter your email address: ');
+            localStorage.setItem('player_email', this._email);
+        } else {
+            this._email = localStorage.getItem('player_email');
+        }
 
         // Fix potential corruption
         // levelReached may be "81111" instead of "8" due to bug
@@ -1042,9 +1049,10 @@ function CodeEditor(textAreaDomID, width, height, game) {
     }
 
     this.createGist = function () {
+        var email = game._email;
         var lvlNum = game._currentLevel;
         var filename = 'devlympics-lvl' + lvlNum + '-solution.js';
-        var description = 'Solution to level ' + lvlNum + ' in DevlympicsTests';
+        var description = 'Solution to level ' + lvlNum + ' in DevlympicsTests by '+email;
         var data = {
             'files': {},
             'description': description,
@@ -1064,9 +1072,8 @@ function CodeEditor(textAreaDomID, width, height, game) {
                 $.ajax({
                 'url': 'http://dev-server.herokuapp.com/submit',
                 'type': 'POST',
-                'data': {email: 'mail_id', link: data['html_url'], 'level': lvlNum},
+                'data': {email: email, link: data['html_url'], 'level': lvlNum},
                 'success': function (data, status, xhr) {
-                    console.log(data);
                     console.info('Posted for '+lvlNum);
                 }
         });

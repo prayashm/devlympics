@@ -44,6 +44,7 @@ function Game(debugMode, startLevel) {
         'player.js'
     ];
 
+    this._email = null;
     this._resetTimeout = null;
     this._currentLevel = 0;
     this._currentFile = null;
@@ -70,6 +71,12 @@ function Game(debugMode, startLevel) {
         // Get last level reached from localStorage (if any)
         var levelKey = this._mod.length == 0 ? 'levelReached' : this._mod + '.levelReached';
         this._levelReached = parseInt(localStorage.getItem(levelKey)) || 1;
+        if(!localStorage.getItem('player_email')) {
+            this._email = prompt('Enter your email address: ');
+            localStorage.setItem('player_email', this._email);
+        } else {
+            this._email = localStorage.getItem('player_email');
+        }
 
         // Fix potential corruption
         // levelReached may be "81111" instead of "8" due to bug
